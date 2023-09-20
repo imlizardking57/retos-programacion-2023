@@ -53,6 +53,6 @@ def tenis(List):
 if __name__ == '__main__':
     
     print('Que empiece el partido')
-    partido = ['p1', 'P1', 'P2', 'P2', 'p1', 'P2', 'P1', 'p1']
+    partido = ['p2', 'P1', 'P2', 'P2', 'p1', 'P2', 'P1', 'p1']
     tenis(partido)    
     
