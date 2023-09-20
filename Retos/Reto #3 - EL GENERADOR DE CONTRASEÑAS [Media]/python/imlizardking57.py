@@ -8,7 +8,11 @@
 # * - Con o sin símbolos.
 # * (Pudiendo combinar todos estos parámetros entre ellos)
 
-import sys, getopt
+import sys
+import getopt
+import string
+import random
+
 def showUsage():
    print ("Random password generator.")
    print ("usage: imlizardking57.py [options]")
@@ -34,7 +38,16 @@ def main(argv):
          showUsage()
          sys.exit()
       elif opt in ("-l", "--length"):
-         passwordLength = arg
+         try:
+            passwordLength = int(arg)
+            if passwordLength < 8:
+               passwordLength = 8
+            elif passwordLength > 15:
+               passwordLength = 15
+         except:
+            print("Error: Password length must be a number between 8-15")
+            showUsage()
+            sys.exit(2)
       elif opt in ("-u", "--upper"):
          bUseUpper = True
       elif opt in ("-n", "--numbers"):
@@ -46,7 +59,24 @@ def main(argv):
    print ("Use Uppercase letters?: " + str(bUseUpper))
    print ("Use numbers?: " + str(bUseNumbers))
    print ("Use symbols?: " + str(bUseSymbols))
+   arrCharacters = []
+   for char in string.ascii_lowercase:
+      arrCharacters.append(char)
+   if bUseUpper:
+      for char in string.ascii_uppercase:
+         arrCharacters.append(char)
+   if bUseNumbers:
+      for digit in string.digits:
+         arrCharacters.append(digit)
+   if bUseSymbols:
+      for symbol in string.punctuation:
+         arrCharacters.append(symbol)
+   passwordGenerated = []
    
+   for x in range(passwordLength):
+      passwordGenerated.append(random.choice(arrCharacters))
+   strPass = ""
+   print("Your generated password is: " + strPass.join(passwordGenerated))
+
 if __name__ == "__main__":
    main(sys.argv[1:])
-   
